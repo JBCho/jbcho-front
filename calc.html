@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>Calculator</title>
+        <link rel="stylesheet" href="calc.css">
+    </head>
+    
+    <body>
+        <script>
+            var value=0
+            var process=""
+            var temp1=""
+            var temp2=""
+            var operator=""
+            
+            function clear()
+            {
+                value=0, process="", temp1="", temp2="", operator=""
+            }
+            
+            function calculate()
+            {
+                temp1_n = parseFloat(temp1)
+                temp2_n = parseFloat(temp2)
+                if(operator=='+') value=temp1_n+temp2_n
+                else if(operator=='*') value=temp1_n*temp2_n
+                else if(operator=='-') value=temp1_n-temp2_n
+                else if(operator=='/') value=temp1_n/temp2_n
+                
+                temp1=value, temp2=""
+                operator=""
+            }
+            
+            function clicked(button_param)
+            {
+                if(button_param=='C') clear()
+                else if(button_param=='+')
+                {
+                    process += ' + '
+                    operator = button_param 
+                }
+                else if(button_param=='-')
+                {
+                    process += ' - '
+                    operator = button_param
+                }
+                else if(button_param == '*') 
+                {
+                    process+=' × '
+                    operator=button_param
+                }
+                else if(button_param=='/')
+                    {
+                        process+=' ÷ '
+                        operator=button_param
+                    }
+                else if(button_param=='=')
+                    {
+                        calculate()
+                    }
+                
+                if(typeof(button_param)=='number') 
+                {
+                    if(operator=="") temp1 += button_param
+                    else temp2+=button_param
+                    
+                    process+= button_param;
+                }
+                
+                document.getElementById("result").innerHTML = value;
+                document.getElementById("process").innerHTML = process;
+            }
+            
+        </script>
+
+       <div class="Calculator">
+        <div class="Screen">
+            <span id="result">0</span>
+            <span id="process"></span>
+        </div>
+        <div class="NumPad">
+           <button onclick="clicked('C')" class="button">C</button>
+           <button class="button">+/-</button>
+           <button class="button">%</button>
+            <button onclick="clicked(7)" class="button">7</button>
+            <button onclick="clicked(8)" class="button">8</button>
+            <button onclick="clicked(9)" class="button">9</button>
+            <button onclick="clicked(4)" class="button">4</button>
+            <button onclick="clicked(5)" class="button">5</button>
+            <button onclick="clicked(6)" class="button">6</button>
+            <button onclick="clicked(1)" class="button">1</button>
+            <button onclick="clicked(2)" class="button">2</button>
+            <button onclick="clicked(3)" class="button">3</button>
+            <button onclick="clicked(0)" class="button">0</button>
+            <button class="button" disabled></button>
+            <button class="button">.</button>
+        </div>
+        <div class="OpPad">
+            <button onclick="clicked('/')" class="button">÷</button>
+            <button onclick="clicked('*')" class="button">×</button>
+            <button onclick="clicked('+')" class="button">＋</button>
+            <button onclick="clicked('-')" class="button">－</button>
+            <button onclick="clicked('=')" class="button">=</button>
+        </div>
+        </div>        
+    </body>
+</html>
